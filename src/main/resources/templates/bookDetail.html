@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>도서 상세 정보</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bookDetail.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <main>
+        <h1>도서 상세 정보</h1>
+        <section class="book-details">
+            <div class="book-cover">
+                <img th:src="${book.cover}" alt="Book Cover" width="300px">
+            </div>
+            <div class="book-info">
+                <p>제목: <span th:text="${book.title}"></span></p>
+                <p>저자: <span th:text="${book.author}"></span></p>
+                <p>출판사: <span th:text="${book.publisher}"></span></p>
+                <p>출판일: <span th:text="${book.pubDate}"></span></p>
+                <p>ISBN: <span th:text="${book.isbn}"></span></p>
+                <p>카테고리: <span th:text="${book.category}"></span></p>
+                <p>설명: <span th:text="${book.description}"></span></p>
+            </div>
+        </section>
+        <section class="book-actions">
+            <p>보유수량: <span th:text="${book.stockstatus}"></span></p>
+            <button class="btnbord" onclick="alert('도서 대출 예약이 완료되었습니다. 카운터로 방문해주세요')">도서 대출 예약</button>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <!-- 공통 푸터 포함 -->
+</body>
+</html>

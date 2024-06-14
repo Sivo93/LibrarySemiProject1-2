@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FI-BO 도서관 시스템</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/write.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+    <form action="/reviews/update" method="post">
+    <table>
+        <input type="hidden" th:value="${review.id}" name="id">
+        <tr><td><h2>리뷰 글쓰기</h2></td></tr>
+    	<tr><td class="header">제목</tr>
+        <tr><td><input type="text" class="tt" id="title" name="title" th:value="${review.title}"></td></tr>
+        <tr><td class="header">Comment</td></tr>
+        <tr><td><input type="text" class="tt" id="author" name="author" th:value="${review.author}"></td></tr>
+        <tr><td class="header">Comment</td></tr>
+        <tr><td><textarea id="content" name="content" th:text="${review.content}"></textarea></td></tr>
+        <tr><td><button type="submit">수정</button></td></tr>
+        </table>
+    </form>
+    <!-- 공통 푸터 포함 -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

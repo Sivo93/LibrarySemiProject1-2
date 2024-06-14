@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>내 정보</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/myInfo.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+	<!-- 부트스트랩 CSS -->
+
+</head>
+
+<body>
+
+	<!-- 공통 헤더 포함 -->
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<main>
+		<h1>내 정보</h1>
+		<div class="info-container">
+			<div class="info-item">
+				<label><strong>아이디:</strong></label>
+				<span th:text="${member.memberId}"></span>
+			</div>
+			<div class="info-item">
+				<label><strong>이름:</strong></label>
+				<span th:text="${member.memberName}"></span>
+			</div>
+			<div class="info-item">
+				<label><strong>전화번호:</strong></label>
+				<span th:text="${member.memberTel}"></span>
+			</div>
+			<input type="hidden" id="memberSeq" th:value="${member.seq}">
+			<button class="btn btn-primary btn-update" id="updateInfoBtn">정보 수정</button>
+			<button class="btn btn-danger btn-delete" id="deleteInfoBtn">회원 탈퇴</button>
+		</div>
+
+		<!-- 관리자 메뉴 -->
+		<div class="admin-menu" th:if="${session.Role} == 'ADMIN'">
+			<h2 class="mt-4">관리자 메뉴</h2>
+			<div class="d-flex justify-content-center">
+				<a href="/member/" class="btn btn-custom">회원 관리</a>
+			</div>
+		</div>
+	</main>
+
+	<!-- 비밀번호 확인 팝업 -->
+	<div id="passwordPopup" class="popup" th:classappend="${#strings.isEmpty(errorMessage) ? '' : 'active'}">
+		<div class="popup-content">
+			<span class="popup-close" id="popupCloseBtn">&times;</span>
+			<h2>비밀번호 확인</h2>
+			<form id="passwordForm" th:action="@{/member/verifyPassword}" method="post">
+				<label for="password">비밀번호:</label>
+				<input type="password" id="password" name="password" required>
+				<div id="passwordError" class="error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+				<button type="submit" class="btn btn-primary btn-confirm">확인</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- 공통 푸터 포함 -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+	<!-- 부트스트랩 JS 및 종속성 -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script>
+		document.getElementById('updateInfoBtn').addEventListener('click', function () {
+			document.getElementById('passwordPopup').classList.add('active');
+		});
+
+		document.getElementById('deleteInfoBtn').addEventListener('click', function () {
+			if (confirm('정말로 회원 탈퇴를 하시겠습니까?')) {
+				const memberSeq = document.getElementById('memberSeq').value;
+				fetch(`/member/delete/${memberSeq}`, {
+					method: 'GET'
+				}).then(response => {
+					if (response.redirected) {
+						window.location.href = response.url;
+					}
+				});
+			}
+		});
+
+		document.getElementById('popupCloseBtn').addEventListener('click', function () {
+			document.getElementById('passwordPopup').classList.remove('active');
+		});
+	</script>
+
+</body>
+
+</html>

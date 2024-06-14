@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Detail</title>
+</head>
+<body>
+    <h1>Application Detail</h1>
+    <p>Title: <span th:text="${application.title}"></span></p>
+    <p>Content: <span th:text="${application.content}"></span></p>
+    <p>Author: <span th:text="${application.author}"></span></p>
+    <p>Created at: <span th:text="${application.createdAt}"></span></p>
+    <!-- Edit and delete buttons (if needed) -->
+    <a th:href="@{/applications/{id}/edit(id=${application.id})}">수정</a><br>
+    <a href="/applications">Back to Application List</a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FI-BO 도서관 시스템</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/board.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<table class="table">
+    <tr><td colspan="2"><h2> 리뷰 게시판</h2></td></tr>
+    <tr class="header">
+        <td class="num">번호</td>
+        <td class="title">제목</td>
+        <td>작성자</td>
+        <td>삭제</td>
+    </tr>
+    <tr class='body' th:each="review : ${reviews}">
+		<td th:text="${review.id}"></td>
+        <td class='title'><a th:href="@{/reviews/{id}(id=${review.id})}" th:text="${review.title}"></a></td>
+        <td th:text="${review.author}"></td>
+		<td> <a th:href="@{/reviews/delete/{id}(id=${review.id})}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></td>
+    </tr>
+</table>
+<br>
+<table>
+    <tr>
+        <td><a th:href="@{/reviews/new}">글쓰기</a></td>
+    </tr>
+</table>
+    <!-- 공통 푸터 포함 -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

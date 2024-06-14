@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FI-BO 도서관 시스템</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+<!-- 공통 헤더 포함 -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+    <div class="main-sections">
+        <div class="main-section">
+            <h3>인기 랭킹</h3>
+            <div class="slider" id="bestseller-slider">
+                <div class="slides">
+                    <div th:each="book : ${bestsellers}">
+                        <img th:src="${book.cover}" th:alt="${book.title}">
+                        <p th:text="${book.title}"></p>
+                    </div>
+                </div>
+                <div class="slider-buttons">
+                    <button class="slider-button" onclick="moveSlide(-1, 'bestseller-slider')">❮</button>
+                    <button class="slider-button" onclick="moveSlide(1, 'bestseller-slider')">❯</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-section">
+            <h3>사서 추천 도서</h3>
+            <div class="slider" id="editorchoice-slider">
+                <div class="slides">
+                    <div th:each="book : ${editorChoices}">
+                        <img th:src="{book.cover}" th:alt="${book.title}">
+                        <p th:text="${book.title}"></p>
+                    </div>
+                </div>
+                <div class="slider-buttons">
+                    <button class="slider-button" onclick="moveSlide(-1, 'editorchoice-slider')">❮</button>
+                    <button class="slider-button" onclick="moveSlide(1, 'editorchoice-slider')">❯</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-section">
+            <h3>최신작</h3>
+            <div class="slider" id="newspecial-slider">
+                <div class="slides">
+                    <div th:each="book : ${newSpecials}">
+                        <img th:src="${book.cover}" th:alt="${book.title}">
+                        <p th:text="${book.title}"></p>
+                    </div>
+                </div>
+                <div class="slider-buttons">
+                    <button class="slider-button" onclick="moveSlide(-1, 'newspecial-slider')">❮</button>
+                    <button class="slider-button" onclick="moveSlide(1, 'newspecial-slider')">❯</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 공통 푸터 포함 -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+    let slideIndex = {
+        'bestseller-slider': 0,
+        'editorchoice-slider': 0,
+        'newspecial-slider': 0
+    };
+
+    function moveSlide(n, sliderId) {
+        const slides = document.querySelector(`#${sliderId} .slides`);
+        const totalSlides = slides.children.length;
+        slideIndex[sliderId] = (slideIndex[sliderId] + n + totalSlides) % totalSlides;
+        slides.style.transform = `translateX(${-slideIndex[sliderId] * 100}%)`;
+    }
+</script>
+</body>
+</html>

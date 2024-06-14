@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>신청 목록</title>
+</head>
+<body>
+    <h2>신청 목록</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 각 신청 게시글을 표 형식으로 표시합니다. -->
+            <tr th:each="application : ${applications}">
+                <td th:text="${application.id}">번호</td>
+                <!-- 게시글 제목을 클릭하면 해당 게시글의 상세 페이지로 이동합니다. -->
+                <td><a th:href="@{/applications/{id}(id=${application.id})}" th:text="${application.title}">게시글 제목</a></td>
+                <td th:text="${application.author}">작성자</td>
+                <td th:text="${application.createdAt}">작성일</td>
+                <td> <a th:href="@{/applications/delete/{id}(id=${notice.id})}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/applications/new}">글쓰기</a>
+</body>
+</html>

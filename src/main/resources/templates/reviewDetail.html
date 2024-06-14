@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FI-BO 도서관 시스템</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/boarddetail.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+    <table> 
+    	<tr><td><h2>리뷰 게시글</h2></td></tr>
+    	<tr><td class="header">제목</tr>
+    	<tr><td><div class="small" th:text="${review.title}"></div></td></tr>
+    	<tr><td class="header">글쓴이</td></tr>
+    	<tr><td><div class="small" th:text="${review.author}"></div></td></tr>
+    	<tr><td class="header">내용</td></tr>
+    	<tr><td><div class="content" th:text="${review.content}"></div></td></tr>
+    	<tr><td><a th:href="@{/reviews/{id}/edit(id=${review.id})}">수정</a></td></tr>
+		<tr><td><a href="/reviews">목록</a></td></tr>
+	</table>
+    <!-- 공통 푸터 포함 -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
+
+
+    

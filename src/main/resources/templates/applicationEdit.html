@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Application</title>
+</head>
+<body>
+    <h1>Edit Application</h1>
+    <form action="/applications/update" method="post">
+        <input type="hidden" th:value="${application.id}" name="id">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" th:value="${application.title}"><br>
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" th:text="${application.content}"></textarea><br>
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author" th:value="${application.author}"><br>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

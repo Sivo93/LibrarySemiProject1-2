@@ -1,0 +1,104 @@
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    position: relative;
+    border-bottom: 2px solid #ddd;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left li {
+    margin-right: 15px;
+}
+
+.nav-right {
+    margin-left: auto;
+}
+
+.nav-right li {
+    margin-left: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    background-color: #555;
+}
+
+.header-search-container {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 5px;
+    z-index: 999; /* Ensure search container is above */
+}
+
+.header-search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    border-radius: 4px;
+}
+
+.header-search-form label,
+.header-search-form select,
+.header-search-form input,
+.header-search-form button {
+    margin: 5px;
+    padding: 5px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    border: none;
+}
+
+.header-search-form label {
+    color: white;
+}
+
+.header-search-form select,
+.header-search-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.header-search-form input {
+    width: 200px;
+}
+
+.header-search-form button {
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+}
+
+.header-search-form button:hover {
+    background-color: #777;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>공통 푸터</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+</head>
+<body>
+    <footer th:fragment="footer">
+        <div class="footer-links">
+            <a href="/notices">공지사항</a>
+            <a href="/reviews">도서후기</a>
+            <a href="/subscs">도서신청</a>
+            <a href="/question">고객 문의</a>
+        </div>
+        <p>&copy; 2024 도서관 시스템. 모든 권리 보유.</p>
+    </footer>
+</body>
+</html>

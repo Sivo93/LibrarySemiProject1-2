@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- 부트스트랩 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* 추가적인 사용자 정의 스타일 */
+    body {
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    td a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    td a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<!-- 네비게이션 바 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">회원 리스트 페이지</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">홈으로<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h2 class="mb-4">회원 리스트</h2>
+<div class="container">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>번호</th>
+        <th>아이디</th>
+        <th>비밀번호</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>역할</th>
+        <th>삭제</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="member : ${memberList}">
+        <td th:text="${member.seq}"></td>
+        <td th:text="${member.memberId}"></td>
+        <td th:text="${member.memberPassword}"></td>
+        <td th:text="${member.memberName}"></td>
+        <td th:text="${member.memberTel}"></td>
+        <td th:text="${member.role}"></td>
+        <td>
+          <a class="btn btn-sm btn-danger" th:href="@{|/admin/member/delete/${member.seq}|}">삭제</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 부트스트랩 JS 및 종속성 -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

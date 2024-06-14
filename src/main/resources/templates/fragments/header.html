@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>공통 헤더</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+</head>
+<body>
+    <header th:fragment="header">
+        <nav>
+            <ul class="nav-left">
+                <li><a th:href="@{/}">FI-BO</a></li>
+            </ul>
+            <div class="header-search-container">
+                <form class="header-search-form" id="headerSearchForm" th:action="@{/search}" method="GET">
+                    <label for="headerSearchType">검색 유형:</label>
+                    <select id="headerSearchType" name="queryType" th:value="${queryType}">
+                        <option value="Title" th:selected="${queryType} == 'Title'">제목</option>
+                        <option value="Author" th:selected="${queryType} == 'Author'">저자</option>
+                    </select>
+                    <input type="text" id="headerQuery" name="query" placeholder="검색어를 입력하세요" th:value="${query}">
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+            <ul class="nav-right">
+                <li th:if="${member == null}"><a th:href="@{/member/login}">로그인</a></li>
+                <li th:if="${member != null}"><a th:href="@{/member/logout}">로그아웃</a></li>
+                <li th:if="${member == null}"><a th:href="@{/member/save}">회원가입</a></li>
+                <li th:if="${member != null}"><a th:href="@{/member/myInfo}" th:text="'환영합니다, ' + ${member.memberName} + '님!'"></a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>
